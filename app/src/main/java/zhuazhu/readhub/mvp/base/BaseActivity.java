@@ -6,23 +6,30 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.ToastUtils;
+import com.gyf.barlibrary.ImmersionBar;
+import com.jkb.fragment.rigger.annotation.Puppet;
 
 import javax.inject.Inject;
+
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import zhuazhu.readhub.R;
 
 /**
  * @author zhuazhu
  **/
-public abstract class BaseActivity<P extends BaseContract.Presenter> extends AppCompatActivity implements BaseContract.View{
-    @Inject
-    protected P mPresenter;
+
+public abstract class BaseActivity extends AppCompatActivity implements BaseContract.View{
+    private Unbinder mUnbinder;
     @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getlayoutId());
+        mUnbinder = ButterKnife.bind(this);
+        ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.c_6c8cff).init();
         initParam();
         initView();
-        mPresenter.onCreate();
     }
 
     /**
@@ -33,36 +40,16 @@ public abstract class BaseActivity<P extends BaseContract.Presenter> extends App
     protected abstract void initParam();
     protected abstract void initView();
 
-    @CallSuper
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mPresenter.onResume();
-    }
-
-    @CallSuper
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mPresenter.onPause();
-    }
-
-    @CallSuper
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mPresenter.onStop();
-    }
-
-    @CallSuper
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.onDestroy();
-    }
-
     @Override
     public void showToast(String msg) {
         ToastUtils.showShort(msg);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder!=null) {
+            mUnbinder.unbind();
+        }
     }
 }

@@ -21,10 +21,11 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         ImmersionBar.with(this).hideBar(BarHide.FLAG_HIDE_BAR).init();
-        mDisposable = Flowable.interval(3, TimeUnit.SECONDS).subscribe(new Consumer<Long>() {
+        mDisposable = Flowable.timer(3, TimeUnit.SECONDS).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long aLong) {
                 MainActivity.start(LauncherActivity.this);
+                finish();
             }
         });
     }
