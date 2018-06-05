@@ -16,4 +16,9 @@ public interface Config {
      * 写入超时时间
      */
     long WRITE_TIMEOUT = 3;
+    /**
+     * bugly的appid
+     */
+    String BUGLY_APP_ID = "f6fea55036";
+    String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 }

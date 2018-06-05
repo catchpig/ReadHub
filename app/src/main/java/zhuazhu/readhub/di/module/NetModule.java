@@ -1,5 +1,8 @@
 package zhuazhu.readhub.di.module;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -38,7 +41,7 @@ public class NetModule {
     @Provides
     public Retrofit providesRetrofit(OkHttpClient okHttpClient){
         return new Retrofit.Builder().baseUrl(ReadService.BASE_URL).addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat(Config.DATE_FORMAT).create()))
                 .client(okHttpClient)
                 .build();
     }

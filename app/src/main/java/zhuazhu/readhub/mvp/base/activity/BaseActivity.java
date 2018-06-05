@@ -1,4 +1,4 @@
-package zhuazhu.readhub.mvp.base;
+package zhuazhu.readhub.mvp.base.activity;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -14,12 +14,13 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import zhuazhu.readhub.R;
+import zhuazhu.readhub.mvp.base.BaseContract;
 
 /**
  * @author zhuazhu
  **/
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseContract.View{
+public abstract class BaseActivity extends AppCompatActivity implements BaseContract.View {
     private Unbinder mUnbinder;
     @CallSuper
     @Override
@@ -28,8 +29,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
         setContentView(getlayoutId());
         mUnbinder = ButterKnife.bind(this);
         ImmersionBar.with(this).fitsSystemWindows(true).statusBarColor(R.color.c_6c8cff).init();
-        initParam();
-        initView();
     }
 
     /**
@@ -37,12 +36,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
      * @return
      */
     protected abstract int getlayoutId();
-    protected abstract void initParam();
-    protected abstract void initView();
+
 
     @Override
     public void showToast(String msg) {
         ToastUtils.showShort(msg);
+    }
+
+    @Override
+    public BaseActivity getBaseActivity() {
+        return this;
     }
 
     @Override

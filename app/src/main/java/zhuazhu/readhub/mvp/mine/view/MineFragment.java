@@ -17,14 +17,17 @@ import zhuazhu.readhub.R;
  */
 @Puppet
 public class MineFragment extends Fragment {
+    private static final String TAG = "MineFragment";
     private static MineFragment sMineFragment;
     public static MineFragment newInstance(){
         if (sMineFragment==null) {
             sMineFragment = new MineFragment();
             sMineFragment.setArguments(new Bundle());
-            Rigger.getRigger(sMineFragment).setFragmentTag("mine");
         }
         return sMineFragment;
+    }
+    public String getFragmentTag(){
+        return TAG;
     }
 
     @Nullable
