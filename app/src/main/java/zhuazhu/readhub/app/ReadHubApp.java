@@ -2,29 +2,31 @@ package zhuazhu.readhub.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
 import com.jkb.fragment.rigger.rigger.Rigger;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
-import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 import zhuazhu.readhub.BuildConfig;
 import zhuazhu.readhub.di.component.AppComponent;
 import zhuazhu.readhub.di.component.DaggerAppComponent;
 import zhuazhu.readhub.di.module.AppModule;
 import zhuazhu.readhub.di.module.NetModule;
+import zhuazhu.readhub.mvp.main.MainActivity;
 
 /**
  * @author zhuazhu
  **/
 public class ReadHubApp extends Application {
+
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -36,23 +38,33 @@ public class ReadHubApp extends Application {
             }
         });
         //设置全局的Footer构建器
-        SmartRefreshLayout.setDefaultRefreshFooterCreator(new DefaultRefreshFooterCreator() {
-            @Override
-            public RefreshFooter createRefreshFooter(Context context, RefreshLayout layout) {
-//                //指定为经典Footer，默认是 BallPulseFooter
-                return new FalsifyFooter(context);
-            }
+        SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
+        //                //指定为经典Footer，默认是 BallPulseFooter
+            return new FalsifyFooter(context);
         });
     }
+
+
     @Override
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
         Rigger.enableDebugLogging(true);
-        initCash();
+        initBugly();
     }
-    private void initCash(){
-        CrashReport.initCrashReport(getApplicationContext(),Config.BUGLY_APP_ID, BuildConfig.DEBUG);
+    private void initBugly() {
+        Beta.autoCheckUpgrade = true;
+        Beta.initDelay = 2000;
+        Beta.canShowUpgradeActs.add(MainActivity.class);
+//        Beta.autoCheckUpgrade = false;
+        Bugly.init(getApplicationContext(), Config.BUGLY_APP_ID, BuildConfig.DEBUG);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
+        Beta.installTinker();
     }
 
     private static AppComponent mAppComponent;
@@ -62,4 +74,5 @@ public class ReadHubApp extends Application {
         }
         return mAppComponent;
     }
+
 }

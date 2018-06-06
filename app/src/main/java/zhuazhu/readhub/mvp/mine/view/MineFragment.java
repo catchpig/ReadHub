@@ -6,17 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
 
+import butterknife.BindView;
 import zhuazhu.readhub.R;
+import zhuazhu.readhub.mvp.base.fragment.BaseFragment;
 
 /**
  * @author zhuazhu
  */
 @Puppet
-public class MineFragment extends Fragment {
+public class MineFragment extends BaseFragment {
     private static final String TAG = "MineFragment";
     private static MineFragment sMineFragment;
     public static MineFragment newInstance(){
@@ -30,10 +33,16 @@ public class MineFragment extends Fragment {
         return TAG;
     }
 
-    @Nullable
+    @BindView(R.id.name)
+    TextView mName;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_mine,container,false);
-        return v;
+    protected int getlayoutId() {
+        return R.layout.fragment_mine;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mName.setText("我的");
     }
 }

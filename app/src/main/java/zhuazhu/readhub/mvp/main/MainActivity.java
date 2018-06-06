@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -61,5 +62,11 @@ public class MainActivity extends BaseActivity {
     protected void clickMine(){
         mTitle.setText("我的");
         Rigger.getRigger(this).showFragment(mMineFragment.getFragmentTag());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Rigger.getRigger(this).close();
     }
 }

@@ -9,7 +9,6 @@ buildscript {
         rxandroid_version = "2.0.2"
         retrofit2_version = "2.4.0"
         okhttp3_version = "3.10.0"
-        bugly_version = "latest.release"
         smartrefresh_version = "1.0.5.1"
     }
 
@@ -22,6 +21,7 @@ buildscript {
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.1'
         classpath 'org.aspectj:aspectjtools:1.8.13'
+        classpath "com.tencent.bugly:tinker-support:1.1.2"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

@@ -3,16 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="zhuazhu.readhub">
 
-    <!-- bugly -->
+    <!-- bugly start -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission
-        android:name="android.permission.READ_LOGS"
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
+    <!-- bugly end -->
 
-    <!-- bugly -->
     <application
         android:name=".app.ReadHubApp"
         android:allowBackup="true"
@@ -38,6 +39,22 @@
             android:name=".mvp.web.WebActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".mvp.hotdetail.view.HotDetailActivity"></activity>
+
+        <!--bugly 应用升级 start-->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+        <!--bugly 应用升级 end-->
     </application>
 
 </manifest>
