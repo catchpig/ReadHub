@@ -2,14 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="zhuazhu.readhub">
-    <!--bugly-->
+
+    <!-- bugly -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_LOGS"
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
-    <!--bugly-->
+
+    <!-- bugly -->
     <application
         android:name=".app.ReadHubApp"
         android:allowBackup="true"
@@ -18,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mvp.launcher.LauncherActivity"
+        <activity
+            android:name=".mvp.launcher.LauncherActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme">
             <intent-filter>
@@ -27,10 +31,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.main.MainActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".mvp.web.WebActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".mvp.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".mvp.web.WebActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".mvp.hotdetail.view.HotDetailActivity"></activity>
     </application>
 
 </manifest>

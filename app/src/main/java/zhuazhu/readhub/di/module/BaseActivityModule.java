@@ -10,7 +10,7 @@ import zhuazhu.readhub.mvp.base.BaseContract;
  **/
 @Module
 public abstract class BaseActivityModule<V extends BaseContract.View> {
-    private final V mView;
+    protected final V mView;
 
     public BaseActivityModule(V view) {
         mView = view;

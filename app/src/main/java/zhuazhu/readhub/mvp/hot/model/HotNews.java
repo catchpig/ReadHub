@@ -1,6 +1,10 @@
 package zhuazhu.readhub.mvp.hot.model;
 
 import java.util.Date;
+import java.util.List;
+
+import zhuazhu.readhub.mvp.hotdetail.model.TimeLine;
+import zhuazhu.readhub.mvp.news.model.News;
 
 /**
  * @author zhuazhu
@@ -16,10 +20,12 @@ public class HotNews {
      */
     private String id;
     private long order;
+    private List<News> newsArray;
     private Date publishDate;
     private String summary;
     private String title;
     private Date updatedAt;
+    private TimeLine timeline;
 
     public String getId() {
         return id;
@@ -35,6 +41,14 @@ public class HotNews {
 
     public void setOrder(long order) {
         this.order = order;
+    }
+
+    public List<News> getNewsArray() {
+        return newsArray;
+    }
+
+    public void setNewsArray(List<News> newsArray) {
+        this.newsArray = newsArray;
     }
 
     public Date getPublishDate() {
@@ -67,5 +81,13 @@ public class HotNews {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public TimeLine getTimeline() {
+        return timeline;
+    }
+
+    public void setTimeline(TimeLine timeline) {
+        this.timeline = timeline;
     }
 }

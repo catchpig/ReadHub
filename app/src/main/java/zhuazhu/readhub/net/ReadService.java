@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import zhuazhu.readhub.mvp.hot.model.HotNews;
 import zhuazhu.readhub.mvp.news.model.News;
@@ -22,16 +23,14 @@ public interface ReadService {
      */
     @GET("topic?pageSize=20")
     Observable<AjaxResult<List<HotNews>>> queryHotNews(@Query("lastCursor") String lastCursor);
-//
-//    /**
-//     * topic detail
-//     * @param topicId
-//     * @return
-//     */
-//    @GET("topic/{topicId}")
-//    Observable<TopicMo> apiTopicDetail(
-//            @Path("topicId") String topicId);
-//
+
+    /**
+     * 获取热门详情
+     * @param topicId
+     * @return
+     */
+    @GET("topic/{topicId}")
+    Observable<HotNews> queryHotNewsDetail(@Path("topicId") String topicId);
 
     /**
      * 科技动态

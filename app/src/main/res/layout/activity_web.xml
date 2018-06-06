@@ -22,12 +22,19 @@
             android:maxLines="1"
             android:ellipsize="end"
             tools:text="标题"/>
-        <ImageView
+        <FrameLayout
             android:id="@+id/back"
             android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_back"
-            android:scaleType="centerInside"/>
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_back"
+                android:scaleType="centerInside"/>
+        </FrameLayout>
+
     </FrameLayout>
     <FrameLayout
         android:id="@+id/frame_web"

@@ -2,15 +2,11 @@ package zhuazhu.readhub.mvp.hot.presenter;
 
 import android.text.TextUtils;
 
-import java.util.List;
-
-import io.reactivex.observers.ResourceObserver;
 import zhuazhu.readhub.mvp.base.BasePresenter;
 import zhuazhu.readhub.mvp.hot.HotContract;
 import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotModel;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
-import zhuazhu.readhub.net.AjaxResult;
+import zhuazhu.readhub.mvp.hotdetail.view.HotDetailActivity;
 
 /**
  * @author zhuazhu
@@ -28,31 +24,20 @@ public class HotPresenter extends BasePresenter<HotContract.View> implements Hot
     public void onCreate() {
         super.onCreate();
         mView.initAdapter(mHotAdapter);
+        mHotAdapter.setOnItemClickListener((hotNews, position) -> {
+            HotDetailActivity.start(mView.getBaseActivity(),hotNews.getId());
+        });
     }
 
     @Override
     public void queryHotNews(String lastCursor) {
-        mHotModel.queryHot(lastCursor).subscribeWith(new ResourceObserver<AjaxResult<List<HotNews>>>() {
-            @Override
-            public void onNext(AjaxResult<List<HotNews>> hotResp) {
-                List<HotNews> hotNewsList = hotResp.getData();
-                long order = hotNewsList.get(hotNewsList.size()-1).getOrder();
-                mView.setLastCursor(String.valueOf(order));
-                if (TextUtils.isEmpty(lastCursor)) {
-                    mHotAdapter.setData(hotNewsList);
-                }else{
-                    mHotAdapter.addData(hotNewsList);
-                }
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
+        mHotModel.queryHot(lastCursor).subscribe(hotNewsList -> {
+            long order = hotNewsList.get(hotNewsList.size()-1).getOrder();
+            mView.setLastCursor(String.valueOf(order));
+            if (TextUtils.isEmpty(lastCursor)) {
+                mHotAdapter.setData(hotNewsList);
+            }else{
+                mHotAdapter.addData(hotNewsList);
             }
         });
     }

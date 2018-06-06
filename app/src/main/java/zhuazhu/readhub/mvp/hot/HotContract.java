@@ -7,7 +7,6 @@ import io.reactivex.Observable;
 import zhuazhu.readhub.mvp.base.BaseContract;
 import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotNews;
-import zhuazhu.readhub.net.AjaxResult;
 
 /**
  * @author zhuazhu
@@ -28,6 +27,6 @@ public interface HotContract {
     }
 
     interface Model {
-        Observable<AjaxResult<List<HotNews>>> queryHot(String lastCursor);
+        Observable<List<HotNews>> queryHot(String lastCursor);
     }
 }
