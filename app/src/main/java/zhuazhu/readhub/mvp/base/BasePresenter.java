@@ -2,10 +2,9 @@ package zhuazhu.readhub.mvp.base;
 
 import android.support.annotation.CallSuper;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
-import zhuazhu.readhub.net.HttpObservable;
+import zhuazhu.readhub.data.net.HttpObservable;
 
 /**
  * @author zhuazhu

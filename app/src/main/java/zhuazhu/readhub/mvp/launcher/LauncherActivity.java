@@ -4,18 +4,12 @@ import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.gyf.barlibrary.BarHide;
-import com.gyf.barlibrary.ImmersionBar;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Flowable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.main.MainActivity;
-import zhuazhu.readhub.net.HttpObservable;
 
 public class LauncherActivity extends AppCompatActivity {
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
 import com.tencent.bugly.beta.Beta;
@@ -35,7 +36,8 @@ public class MineFragment extends BaseFragment {
     public String getFragmentTag(){
         return TAG;
     }
-
+    @BindView(R.id.version)
+    TextView mVersion;
     @Override
     protected int getlayoutId() {
         return R.layout.fragment_mine;
@@ -44,6 +46,7 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mVersion.setText(String.format("当前版本:%s.%d", AppUtils.getAppVersionName(),AppUtils.getAppVersionCode()));
     }
     @OnClick({R.id.blog_address,R.id.github_address})
     protected void clickAdress(TextView address){

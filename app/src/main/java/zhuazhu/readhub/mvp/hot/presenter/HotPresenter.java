@@ -1,6 +1,7 @@
 package zhuazhu.readhub.mvp.hot.presenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.util.List;
 
@@ -10,12 +11,13 @@ import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotModel;
 import zhuazhu.readhub.mvp.hot.model.HotNews;
 import zhuazhu.readhub.mvp.hotdetail.view.HotDetailActivity;
-import zhuazhu.readhub.net.HttpObservable;
+import zhuazhu.readhub.data.net.HttpObservable;
 
 /**
  * @author zhuazhu
  **/
 public class HotPresenter extends BasePresenter<HotContract.View> implements HotContract.Presenter {
+    private static final String TAG = "HotPresenter";
     private final HotContract.Model mHotModel;
     private final HotAdapter mHotAdapter;
     public HotPresenter(HotContract.View view,HotModel hotModel,HotAdapter hotAdapter) {
@@ -40,6 +42,7 @@ public class HotPresenter extends BasePresenter<HotContract.View> implements Hot
             public void onNext(List<HotNews> hotNews) {
                 long order = hotNews.get(hotNews.size()-1).getOrder();
                 mView.setLastCursor(String.valueOf(order));
+                Log.i(TAG,"个数->"+hotNews.size());
                 if (TextUtils.isEmpty(lastCursor)) {
                     mHotAdapter.setData(hotNews);
                 }else{

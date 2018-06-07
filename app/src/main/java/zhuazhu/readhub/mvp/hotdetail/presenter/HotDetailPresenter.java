@@ -1,18 +1,14 @@
 package zhuazhu.readhub.mvp.hotdetail.presenter;
 
-import io.reactivex.functions.Consumer;
 import zhuazhu.readhub.mvp.base.BasePresenter;
-import zhuazhu.readhub.mvp.base.adapter.RecyclerAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotNews;
 import zhuazhu.readhub.mvp.hotdetail.HotDetailContract;
 import zhuazhu.readhub.mvp.hotdetail.adapter.NewsPageAdapter;
 import zhuazhu.readhub.mvp.hotdetail.adapter.TimeLineAdapter;
 import zhuazhu.readhub.mvp.hotdetail.model.HotDetailModel;
-import zhuazhu.readhub.mvp.hotdetail.model.HotTimeLine;
 import zhuazhu.readhub.mvp.hotdetail.view.HotDetailActivity;
-import zhuazhu.readhub.mvp.news.model.News;
 import zhuazhu.readhub.mvp.web.WebActivity;
-import zhuazhu.readhub.net.HttpObservable;
+import zhuazhu.readhub.data.net.HttpObservable;
 
 /**
  * @author zhuazhu

@@ -22,7 +22,14 @@
         android:textSize="14sp"
         android:textColor="@color/c_333"
         android:text="327785185@qq.com"/>
-
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:textColor="@color/c_333"
+        android:text="当前版本"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

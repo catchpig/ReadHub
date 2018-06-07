@@ -8,32 +8,31 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.rx_cache2.DynamicKey;
+import io.rx_cache2.Reply;
+import zhuazhu.readhub.data.cash.ReadHubCacheProviders;
 import zhuazhu.readhub.mvp.hot.HotContract;
-import zhuazhu.readhub.net.AjaxResult;
-import zhuazhu.readhub.net.ReadService;
+import zhuazhu.readhub.data.net.AjaxResult;
+import zhuazhu.readhub.data.net.ReadService;
+import zhuazhu.readhub.utils.RxSchedulersHelper;
 
 /**
  * @author zhuazhu
  **/
 public class HotModel implements HotContract.Model {
     private final ReadService mReadService;
-
+    private final ReadHubCacheProviders mCacheProviders;
+//Method threw 'java.lang.IllegalArgumentException' exception. Cannot evaluate $Proxy5.toString()
     @Inject
-    public HotModel(ReadService readService) {
+    public HotModel(ReadService readService,ReadHubCacheProviders readHubCacheProviders) {
         mReadService = readService;
+        mCacheProviders = readHubCacheProviders;
     }
 
     @Override
     public Observable<List<HotNews>> queryHot(String lastCursor) {
-        return mReadService
-                .queryHotNews(lastCursor)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<AjaxResult<List<HotNews>>, List<HotNews>>() {
-                    @Override
-                    public List<HotNews> apply(AjaxResult<List<HotNews>> listAjaxResult) throws Exception {
-                        return listAjaxResult.getData();
-                    }
-                });
+        Observable<List<HotNews>> observable = RxSchedulersHelper.transform(mReadService.queryHotNews(lastCursor));
+        return mCacheProviders
+                .queryHotNews(observable,new DynamicKey(lastCursor));
     }
 }

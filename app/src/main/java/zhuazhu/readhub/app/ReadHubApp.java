@@ -1,6 +1,7 @@
 package zhuazhu.readhub.app;
 
 import android.app.Application;
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
@@ -52,8 +53,7 @@ public class ReadHubApp extends Application {
     private void initBugly() {
         Beta.autoCheckUpgrade = true;
         Beta.initDelay = 2000;
-        Beta.canShowUpgradeActs.add(MainActivity.class);
-//        Beta.autoCheckUpgrade = false;
+        Beta.canNotShowUpgradeActs.add(LauncherActivity.class);
         Bugly.init(getApplicationContext(), Config.BUGLY_APP_ID, BuildConfig.DEBUG);
     }
 

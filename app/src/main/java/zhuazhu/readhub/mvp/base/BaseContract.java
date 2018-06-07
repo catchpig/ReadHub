@@ -1,10 +1,8 @@
 package zhuazhu.readhub.mvp.base;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import zhuazhu.readhub.mvp.base.activity.BaseActivity;
-import zhuazhu.readhub.net.HttpObservable;
+import zhuazhu.readhub.data.net.HttpObservable;
 
 /**
  * @author zhuazhu

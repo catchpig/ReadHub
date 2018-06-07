@@ -10,7 +10,7 @@ import zhuazhu.readhub.mvp.news.contract.NewsContract;
 import zhuazhu.readhub.mvp.news.model.News;
 import zhuazhu.readhub.mvp.news.model.NewsModel;
 import zhuazhu.readhub.mvp.web.WebActivity;
-import zhuazhu.readhub.net.HttpObservable;
+import zhuazhu.readhub.data.net.HttpObservable;
 
 /**
  * @author zhuazhu

@@ -17,8 +17,8 @@ android {
         applicationId "zhuazhu.readhub"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 2
-        versionName "1.0.1"
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
         // 开启multidex
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -126,4 +126,8 @@ dependencies {
     implementation 'com.just.agentweb:agentweb:4.0.2'
     //rxpermissions(权限申请)
     implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    //rxcache(网络缓存库)
+    implementation "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
+    implementation 'com.github.VictorAlbertos.Jolyglot:gson:0.0.4'
+
 }

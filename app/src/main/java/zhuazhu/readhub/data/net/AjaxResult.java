@@ -1,4 +1,4 @@
-package zhuazhu.readhub.net;
+package zhuazhu.readhub.data.net;
 
 /**
  * @author zhuazhu
