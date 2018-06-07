@@ -129,5 +129,6 @@ dependencies {
     //rxcache(网络缓存库)
     implementation "com.github.VictorAlbertos.RxCache:runtime:1.8.3-2.x"
     implementation 'com.github.VictorAlbertos.Jolyglot:gson:0.0.4'
-
+    //日志
+    implementation 'com.jakewharton.timber:timber:4.7.0'
 }

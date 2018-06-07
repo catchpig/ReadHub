@@ -1,7 +1,6 @@
 package zhuazhu.readhub.di.module;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,6 +22,7 @@ import zhuazhu.readhub.BuildConfig;
 import zhuazhu.readhub.app.Config;
 import zhuazhu.readhub.data.cash.ReadHubCacheProviders;
 import zhuazhu.readhub.data.net.ReadService;
+import zhuazhu.readhub.log.Logger;
 
 /**
  * @author zhuazhu
@@ -50,7 +50,7 @@ public class NetModule {
     @Singleton
     @Provides
     public HttpLoggingInterceptor providesHttpLoggingInterceptor(){
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> Log.i(TAG,message));
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> Logger.i(TAG,message));
         httpLoggingInterceptor.setLevel(BuildConfig.DEBUG? HttpLoggingInterceptor.Level.BODY: HttpLoggingInterceptor.Level.NONE);
         return httpLoggingInterceptor;
     }

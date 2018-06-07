@@ -5,7 +5,9 @@ import android.util.Log;
 
 import java.util.List;
 
+import zhuazhu.readhub.aop.annotaion.SingleClick;
 import zhuazhu.readhub.mvp.base.BasePresenter;
+import zhuazhu.readhub.mvp.base.adapter.RecyclerAdapter;
 import zhuazhu.readhub.mvp.hot.HotContract;
 import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotModel;
@@ -16,7 +18,7 @@ import zhuazhu.readhub.data.net.HttpObservable;
 /**
  * @author zhuazhu
  **/
-public class HotPresenter extends BasePresenter<HotContract.View> implements HotContract.Presenter {
+public class HotPresenter extends BasePresenter<HotContract.View> implements HotContract.Presenter,RecyclerAdapter.OnItemClickListener<HotNews> {
     private static final String TAG = "HotPresenter";
     private final HotContract.Model mHotModel;
     private final HotAdapter mHotAdapter;
@@ -30,9 +32,7 @@ public class HotPresenter extends BasePresenter<HotContract.View> implements Hot
     public void onCreate() {
         super.onCreate();
         mView.initAdapter(mHotAdapter);
-        mHotAdapter.setOnItemClickListener((hotNews, position) -> {
-            HotDetailActivity.start(mView.getBaseActivity(),hotNews.getId());
-        });
+        mHotAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -42,7 +42,6 @@ public class HotPresenter extends BasePresenter<HotContract.View> implements Hot
             public void onNext(List<HotNews> hotNews) {
                 long order = hotNews.get(hotNews.size()-1).getOrder();
                 mView.setLastCursor(String.valueOf(order));
-                Log.i(TAG,"个数->"+hotNews.size());
                 if (TextUtils.isEmpty(lastCursor)) {
                     mHotAdapter.setData(hotNews);
                 }else{
@@ -50,5 +49,10 @@ public class HotPresenter extends BasePresenter<HotContract.View> implements Hot
                 }
             }
         });
+    }
+    @SingleClick
+    @Override
+    public void onItemClick(HotNews hotNews, int position) {
+        HotDetailActivity.start(mView.getBaseActivity(),hotNews.getId());
     }
 }

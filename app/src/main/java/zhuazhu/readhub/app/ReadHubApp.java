@@ -16,11 +16,14 @@ import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 
+import timber.log.Timber;
 import zhuazhu.readhub.BuildConfig;
 import zhuazhu.readhub.di.component.AppComponent;
 import zhuazhu.readhub.di.component.DaggerAppComponent;
 import zhuazhu.readhub.di.module.AppModule;
 import zhuazhu.readhub.di.module.NetModule;
+import zhuazhu.readhub.log.DebugLogTree;
+import zhuazhu.readhub.log.ReleaseLogTree;
 import zhuazhu.readhub.mvp.main.MainActivity;
 
 /**
@@ -37,7 +40,7 @@ public class ReadHubApp extends Application {
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {
-        //                //指定为经典Footer，默认是 BallPulseFooter
+            layout.setFooterTriggerRate(0);
             return new FalsifyFooter(context);
         });
     }
@@ -48,6 +51,13 @@ public class ReadHubApp extends Application {
         super.onCreate();
         Utils.init(this);
         initBugly();
+    }
+    private void initLog(){
+        if(BuildConfig.DEBUG){
+            Timber.plant(new DebugLogTree());
+        }else{
+            Timber.plant(new ReleaseLogTree());
+        }
     }
     private void initBugly() {
         Beta.autoCheckUpgrade = true;

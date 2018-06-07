@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import com.jkb.fragment.rigger.annotation.Animator;
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import butterknife.BindView;
 import zhuazhu.readhub.R;
@@ -60,12 +62,17 @@ public class HotFragment extends BasePresenterFragment<HotContract.Presenter> im
     @Override
     protected void initView() {
         mRefreshLayout.autoRefresh();
-        mRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mLastCursor = "";
-            mPresenter.queryHotNews(mLastCursor);
-        });
-        mRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
-            mPresenter.queryHotNews(mLastCursor);
+        mRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                mPresenter.queryHotNews(mLastCursor);
+            }
+
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mLastCursor = "";
+                mPresenter.queryHotNews(mLastCursor);
+            }
         });
     }
 
