@@ -1,13 +1,18 @@
 package zhuazhu.readhub.mvp.base;
 
+import android.support.annotation.CallSuper;
+
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
+import zhuazhu.readhub.net.HttpObservable;
 
 /**
  * @author zhuazhu
  **/
 public abstract class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter {
     protected final V mView;
-    private final CompositeDisposable mDisposable;
+    protected final CompositeDisposable mDisposable;
 
     public BasePresenter(V view) {
         mView = view;
@@ -33,9 +38,14 @@ public abstract class BasePresenter<V extends BaseContract.View> implements Base
     public void onStop() {
 
     }
-
+    @CallSuper
     @Override
     public void onDestroy() {
+        mDisposable.clear();
+    }
 
+    @Override
+    public <T> void execute(Observable<T> observable, HttpObservable<T> httpObservable) {
+        mDisposable.add(observable.subscribeWith(httpObservable));
     }
 }

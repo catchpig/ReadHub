@@ -30,12 +30,9 @@ public class ReadHubApp extends Application {
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
-        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
-            @Override
-            public RefreshHeader createRefreshHeader(Context context, RefreshLayout layout) {
-                layout.setEnableHeaderTranslationContent(false);
-                return new MaterialHeader(context);
-            }
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
+            layout.setEnableHeaderTranslationContent(false);
+            return new MaterialHeader(context);
         });
         //设置全局的Footer构建器
         SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) -> {

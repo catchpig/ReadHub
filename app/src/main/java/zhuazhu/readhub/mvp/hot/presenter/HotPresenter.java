@@ -2,11 +2,15 @@ package zhuazhu.readhub.mvp.hot.presenter;
 
 import android.text.TextUtils;
 
+import java.util.List;
+
 import zhuazhu.readhub.mvp.base.BasePresenter;
 import zhuazhu.readhub.mvp.hot.HotContract;
 import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotModel;
+import zhuazhu.readhub.mvp.hot.model.HotNews;
 import zhuazhu.readhub.mvp.hotdetail.view.HotDetailActivity;
+import zhuazhu.readhub.net.HttpObservable;
 
 /**
  * @author zhuazhu
@@ -31,13 +35,16 @@ public class HotPresenter extends BasePresenter<HotContract.View> implements Hot
 
     @Override
     public void queryHotNews(String lastCursor) {
-        mHotModel.queryHot(lastCursor).subscribe(hotNewsList -> {
-            long order = hotNewsList.get(hotNewsList.size()-1).getOrder();
-            mView.setLastCursor(String.valueOf(order));
-            if (TextUtils.isEmpty(lastCursor)) {
-                mHotAdapter.setData(hotNewsList);
-            }else{
-                mHotAdapter.addData(hotNewsList);
+        execute(mHotModel.queryHot(lastCursor), new HttpObservable<List<HotNews>>() {
+            @Override
+            public void onNext(List<HotNews> hotNews) {
+                long order = hotNews.get(hotNews.size()-1).getOrder();
+                mView.setLastCursor(String.valueOf(order));
+                if (TextUtils.isEmpty(lastCursor)) {
+                    mHotAdapter.setData(hotNews);
+                }else{
+                    mHotAdapter.addData(hotNews);
+                }
             }
         });
     }

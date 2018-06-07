@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
+import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.base.fragment.BaseFragment;
+import zhuazhu.readhub.mvp.web.WebActivity;
 
 /**
  * @author zhuazhu
@@ -33,8 +36,6 @@ public class MineFragment extends BaseFragment {
         return TAG;
     }
 
-    @BindView(R.id.name)
-    TextView mName;
     @Override
     protected int getlayoutId() {
         return R.layout.fragment_mine;
@@ -43,6 +44,13 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mName.setText("我的");
+    }
+    @OnClick({R.id.blog_address,R.id.github_address})
+    protected void clickAdress(TextView address){
+        WebActivity.start(getBaseActivity(),address.getText().toString());
+    }
+    @OnClick(R.id.version_update)
+    protected void clickVersionUpdate(){
+        Beta.checkUpgrade();
     }
 }

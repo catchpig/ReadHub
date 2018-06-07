@@ -12,6 +12,7 @@ import zhuazhu.readhub.mvp.hotdetail.model.HotTimeLine;
 import zhuazhu.readhub.mvp.hotdetail.view.HotDetailActivity;
 import zhuazhu.readhub.mvp.news.model.News;
 import zhuazhu.readhub.mvp.web.WebActivity;
+import zhuazhu.readhub.net.HttpObservable;
 
 /**
  * @author zhuazhu
@@ -41,12 +42,15 @@ public class HotDetailPresenter extends BasePresenter<HotDetailContract.View> im
 
     @Override
     public void queryDetail(String topicId) {
-        mModel.queryDetail(topicId).subscribe(hotNews -> {
-            mView.setTitle(hotNews.getTitle());
-            mView.setContent(hotNews.getSummary());
-            mTimeLineAdapter.setData(hotNews.getTimeline().getTopics());
-            mNewsPageAdapter.setData(hotNews.getNewsArray());
-            mView.setIndexNews(String.format("左右滑动查看更多1/%d",getPageSize()));
+        execute(mModel.queryDetail(topicId), new HttpObservable<HotNews>() {
+            @Override
+            public void onNext(HotNews hotNews) {
+                mView.setTitle(hotNews.getTitle());
+                mView.setContent(hotNews.getSummary());
+                mTimeLineAdapter.setData(hotNews.getTimeline().getTopics());
+                mNewsPageAdapter.setData(hotNews.getNewsArray());
+                mView.setIndexNews(String.format("左右滑动查看更多1/%d",getPageSize()));
+            }
         });
     }
 

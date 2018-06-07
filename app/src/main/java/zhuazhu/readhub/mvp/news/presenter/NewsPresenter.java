@@ -2,11 +2,15 @@ package zhuazhu.readhub.mvp.news.presenter;
 
 import android.text.TextUtils;
 
+import java.util.List;
+
 import zhuazhu.readhub.mvp.base.BasePresenter;
 import zhuazhu.readhub.mvp.news.adpter.NewsAdapter;
 import zhuazhu.readhub.mvp.news.contract.NewsContract;
+import zhuazhu.readhub.mvp.news.model.News;
 import zhuazhu.readhub.mvp.news.model.NewsModel;
 import zhuazhu.readhub.mvp.web.WebActivity;
+import zhuazhu.readhub.net.HttpObservable;
 
 /**
  * @author zhuazhu
@@ -32,39 +36,48 @@ public class NewsPresenter extends BasePresenter<NewsContract.View> implements N
 
     @Override
     public void queryScienceNews(String lastCursor) {
-        mModel.queryScienceNews(lastCursor).subscribe(news -> {
-            long order = news.get(news.size()-1).getPublishDate().getTime();
-            mView.setLastCursor(String.valueOf(order));
-            if (TextUtils.isEmpty(lastCursor)) {
-                mNewsAdapter.setData(news);
-            }else{
-                mNewsAdapter.addData(news);
+        execute(mModel.queryScienceNews(lastCursor), new HttpObservable<List<News>>() {
+            @Override
+            public void onNext(List<News> news) {
+                long order = news.get(news.size()-1).getPublishDate().getTime();
+                mView.setLastCursor(String.valueOf(order));
+                if (TextUtils.isEmpty(lastCursor)) {
+                    mNewsAdapter.setData(news);
+                }else{
+                    mNewsAdapter.addData(news);
+                }
             }
         });
     }
 
     @Override
     public void queryDeveloperNews(String lastCursor) {
-        mModel.queryDeveloperNews(lastCursor).subscribe(news -> {
-            long order = news.get(news.size()-1).getPublishDate().getTime();
-            mView.setLastCursor(String.valueOf(order));
-            if (TextUtils.isEmpty(lastCursor)) {
-                mNewsAdapter.setData(news);
-            }else{
-                mNewsAdapter.addData(news);
+        execute(mModel.queryDeveloperNews(lastCursor), new HttpObservable<List<News>>() {
+            @Override
+            public void onNext(List<News> news) {
+                long order = news.get(news.size()-1).getPublishDate().getTime();
+                mView.setLastCursor(String.valueOf(order));
+                if (TextUtils.isEmpty(lastCursor)) {
+                    mNewsAdapter.setData(news);
+                }else{
+                    mNewsAdapter.addData(news);
+                }
             }
         });
     }
 
     @Override
     public void queryChainNews(String lastCursor) {
-        mModel.queryChainNews(lastCursor).subscribe(news -> {
-            long order = news.get(news.size()-1).getPublishDate().getTime();
-            mView.setLastCursor(String.valueOf(order));
-            if (TextUtils.isEmpty(lastCursor)) {
-                mNewsAdapter.setData(news);
-            }else{
-                mNewsAdapter.addData(news);
+        execute(mModel.queryChainNews(lastCursor), new HttpObservable<List<News>>() {
+            @Override
+            public void onNext(List<News> news) {
+                long order = news.get(news.size()-1).getPublishDate().getTime();
+                mView.setLastCursor(String.valueOf(order));
+                if (TextUtils.isEmpty(lastCursor)) {
+                    mNewsAdapter.setData(news);
+                }else{
+                    mNewsAdapter.addData(news);
+                }
             }
         });
     }

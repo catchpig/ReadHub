@@ -13,6 +13,8 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Flowable;
+import io.reactivex.disposables.CompositeDisposable;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.base.BaseContract;
 
@@ -47,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
     public BaseActivity getBaseActivity() {
         return this;
     }
-
+    @CallSuper
     @Override
     protected void onDestroy() {
         super.onDestroy();
