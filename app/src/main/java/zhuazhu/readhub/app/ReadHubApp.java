@@ -62,7 +62,7 @@ public class ReadHubApp extends Application {
     private void initBugly() {
         Beta.autoCheckUpgrade = true;
         Beta.initDelay = 2000;
-        Beta.canNotShowUpgradeActs.add(LauncherActivity.class);
+        Beta.autoCheckUpgrade = false;
         Bugly.init(getApplicationContext(), Config.BUGLY_APP_ID, BuildConfig.DEBUG);
     }
 

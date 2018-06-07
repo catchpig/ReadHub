@@ -42,7 +42,9 @@ public abstract class RecyclerAdapter<M,V extends ViewHolder> extends Adapter<V>
         bindViewHolder(holder,m,position);
         if(mOnItemClickListener!=null){
             holder.itemView.setOnClickListener(v -> {
-                mOnItemClickListener.onItemClick(m,position);
+                if(mOnItemClickListener!=null){
+                    mOnItemClickListener.onItemClick(m,position);
+                }
             });
         }
     }

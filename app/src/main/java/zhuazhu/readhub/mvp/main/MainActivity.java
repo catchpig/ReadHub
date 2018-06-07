@@ -35,6 +35,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Beta.checkUpgrade(false,true);
         initView();
     }
 
@@ -48,7 +49,6 @@ public class MainActivity extends BaseActivity {
         mMineFragment = MineFragment.newInstance();
         Rigger.getRigger(this).addFragment(R.id.fragment,mHotFragment,mNewsFragment,mMineFragment);
         clickHot();
-        Rigger.getRigger(this).printStack();
     }
     @OnClick(R.id.radio_hot)
     protected void clickHot(){
