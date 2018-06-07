@@ -22,19 +22,16 @@ import zhuazhu.readhub.mvp.news.adpter.TabViewPagerAdapter;
 /**
  * @author zhuazhu
  */
-@Puppet
 public class NewsFragment extends BaseFragment {
     private static final String TAG = "NewsFragment";
-    private static NewsFragment sNewsFragment;
-    public static NewsFragment newInstance(){
-        if (sNewsFragment==null) {
-            sNewsFragment = new NewsFragment();
-            sNewsFragment.setArguments(new Bundle());
-        }
-        return sNewsFragment;
+
+    public static NewsFragment newInstance() {
+        NewsFragment newsFragment = new NewsFragment();
+        newsFragment.setArguments(new Bundle());
+        return newsFragment;
     }
 
-    public String getFragmentTag(){
+    public String getFragmentTag() {
         return TAG;
     }
 
@@ -42,6 +39,7 @@ public class NewsFragment extends BaseFragment {
     TabLayout mTabLayout;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
+
     @Override
     protected int getlayoutId() {
         return R.layout.fragment_news;
@@ -52,12 +50,9 @@ public class NewsFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         initView();
     }
-    private List<Fragment> mFragments = new ArrayList<>();
-    private void initView(){
-        mFragments.add(ScienceFragment.newInstance());
-        mFragments.add(DeveloperFragment.newInstance());
-        mFragments.add(ChainFragment.newIntance());
-        TabViewPagerAdapter adapter = new TabViewPagerAdapter(mBaseActivity.getSupportFragmentManager(),mFragments);
+
+    private void initView() {
+        TabViewPagerAdapter adapter = new TabViewPagerAdapter(mBaseActivity.getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout.setupWithViewPager(mViewPager);

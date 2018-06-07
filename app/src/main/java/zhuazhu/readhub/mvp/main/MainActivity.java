@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
 import com.tencent.bugly.beta.Beta;
@@ -47,6 +48,7 @@ public class MainActivity extends BaseActivity {
         mMineFragment = MineFragment.newInstance();
         Rigger.getRigger(this).addFragment(R.id.fragment,mHotFragment,mNewsFragment,mMineFragment);
         clickHot();
+        Rigger.getRigger(this).printStack();
     }
     @OnClick(R.id.radio_hot)
     protected void clickHot(){
@@ -65,10 +67,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Rigger.getRigger(this).close(mHotFragment);
-        Rigger.getRigger(this).close(mNewsFragment);
-        Rigger.getRigger(this).close(mMineFragment);
+    public void onBackPressed() {
+        super.onBackPressed();
+        AppUtils.exitApp();
     }
 }

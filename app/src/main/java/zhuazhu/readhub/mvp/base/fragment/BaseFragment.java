@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jkb.fragment.rigger.annotation.Puppet;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import zhuazhu.readhub.mvp.base.BaseContract;
@@ -15,6 +17,7 @@ import zhuazhu.readhub.mvp.base.activity.BaseActivity;
 /**
  * @author zhuazhu
  **/
+@Puppet
 public abstract class BaseFragment extends Fragment implements BaseContract.View {
     private Unbinder mUnbinder;
     protected BaseActivity mBaseActivity;

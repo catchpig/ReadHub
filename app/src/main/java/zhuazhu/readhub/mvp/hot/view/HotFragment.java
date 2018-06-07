@@ -19,16 +19,12 @@ import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 /**
  * @author zhuazhu
  */
-@Puppet
 public class HotFragment extends BasePresenterFragment<HotContract.Presenter> implements HotContract.View {
     private static final String TAG = "HotFragment";
-    private static HotFragment sHotFragment;
     public static HotFragment newInstance(){
-        if(sHotFragment==null){
-            sHotFragment = new HotFragment();
-            sHotFragment.setArguments(new Bundle());
-        }
-        return sHotFragment;
+        HotFragment hotFragment = new HotFragment();
+        hotFragment.setArguments(new Bundle());
+        return hotFragment;
     }
     public String getFragmentTag(){
         return TAG;

@@ -22,16 +22,12 @@ import zhuazhu.readhub.mvp.web.WebActivity;
 /**
  * @author zhuazhu
  */
-@Puppet
 public class MineFragment extends BaseFragment {
     private static final String TAG = "MineFragment";
-    private static MineFragment sMineFragment;
     public static MineFragment newInstance(){
-        if (sMineFragment==null) {
-            sMineFragment = new MineFragment();
-            sMineFragment.setArguments(new Bundle());
-        }
-        return sMineFragment;
+        MineFragment mineFragment = new MineFragment();
+        mineFragment.setArguments(new Bundle());
+        return mineFragment;
     }
     public String getFragmentTag(){
         return TAG;

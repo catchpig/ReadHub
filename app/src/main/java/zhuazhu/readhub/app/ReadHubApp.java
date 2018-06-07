@@ -47,7 +47,6 @@ public class ReadHubApp extends Application {
     public void onCreate() {
         super.onCreate();
         Utils.init(this);
-        Rigger.enableDebugLogging(true);
         initBugly();
     }
     private void initBugly() {

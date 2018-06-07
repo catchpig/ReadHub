@@ -1,11 +1,18 @@
 package zhuazhu.readhub.mvp.news.view;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.jkb.fragment.rigger.annotation.LazyLoad;
+import com.jkb.fragment.rigger.annotation.Puppet;
+import com.jkb.fragment.rigger.rigger.Rigger;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.app.ReadHubApp;
 import zhuazhu.readhub.di.module.NewsModule;
@@ -16,21 +23,27 @@ import zhuazhu.readhub.mvp.news.contract.NewsContract;
 /**
  * @author zhuazhu
  **/
+@LazyLoad
+@Puppet
 public class ScienceFragment extends BasePresenterFragment<NewsContract.Presenter> implements NewsContract.View {
-    private static ScienceFragment sScienceFragment;
-    public static ScienceFragment newInstance(){
-        if (sScienceFragment==null) {
-            sScienceFragment = new ScienceFragment();
-        }
-        return sScienceFragment;
+    public static ScienceFragment newInstance() {
+        ScienceFragment scienceFragment = new ScienceFragment();
+        scienceFragment.setArguments(new Bundle());
+        return scienceFragment;
     }
+
     @BindView(R.id.refresh)
     SmartRefreshLayout mRefreshLayout;
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
+
     @Override
     protected int getlayoutId() {
         return R.layout.fragment_science;
+    }
+
+    public void onLazyLoadViewCreated(Bundle savedInstanceState) {
+        mRefreshLayout.autoRefresh();
     }
 
     @Override
@@ -42,10 +55,11 @@ public class ScienceFragment extends BasePresenterFragment<NewsContract.Presente
     protected void injectComponent() {
         ReadHubApp.getAppComponent().newsComponent(new NewsModule(this)).inject(this);
     }
+
     private String mLastCursor;
+
     @Override
     protected void initView() {
-        mRefreshLayout.autoRefresh();
         mRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mLastCursor = "";
             mPresenter.queryScienceNews(mLastCursor);
