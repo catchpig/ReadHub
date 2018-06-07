@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import com.jkb.fragment.rigger.annotation.Animator;
+import com.jkb.fragment.rigger.annotation.LazyLoad;
 import com.jkb.fragment.rigger.annotation.Puppet;
 
 import java.util.ArrayList;

@@ -67,6 +67,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Rigger.getRigger(this).close();
+        Rigger.getRigger(this).close(mHotFragment);
+        Rigger.getRigger(this).close(mNewsFragment);
+        Rigger.getRigger(this).close(mMineFragment);
     }
 }

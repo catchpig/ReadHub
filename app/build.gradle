@@ -124,4 +124,6 @@ dependencies {
 
     //浏览器
     implementation 'com.just.agentweb:agentweb:4.0.2'
+    //rxpermissions(权限申请)
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 }

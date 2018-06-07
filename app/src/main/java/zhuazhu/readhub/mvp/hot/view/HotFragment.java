@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.jkb.fragment.rigger.annotation.Animator;
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
