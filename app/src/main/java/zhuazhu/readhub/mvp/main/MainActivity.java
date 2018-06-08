@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Beta.checkUpgrade(false,true);
+        Beta.checkUpgrade(false,false);
         initView();
     }
 
