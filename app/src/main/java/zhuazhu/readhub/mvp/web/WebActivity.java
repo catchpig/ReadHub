@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.just.agentweb.AgentWeb;
@@ -67,6 +68,7 @@ public class WebActivity extends BaseActivity {
                 .ready()
                 .go(mUrl);
     }
+
     @OnClick(R.id.back)
     protected void back(){
         finish();

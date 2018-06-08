@@ -5,14 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.DynamicKey;
-import io.rx_cache2.Reply;
 import zhuazhu.readhub.data.cash.ReadHubCacheProviders;
+import zhuazhu.readhub.data.db.model.HotNews;
 import zhuazhu.readhub.mvp.hot.HotContract;
-import zhuazhu.readhub.data.net.AjaxResult;
 import zhuazhu.readhub.data.net.ReadService;
 import zhuazhu.readhub.utils.RxSchedulersHelper;
 

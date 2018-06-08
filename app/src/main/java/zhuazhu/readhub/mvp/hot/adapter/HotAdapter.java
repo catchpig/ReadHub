@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.base.adapter.RecyclerAdapter;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
+import zhuazhu.readhub.data.db.model.HotNews;
 
 /**
  * @author zhuazhu

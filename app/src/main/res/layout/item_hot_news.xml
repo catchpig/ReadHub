@@ -54,31 +54,21 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:background="#dedede"/>
-            <FrameLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
-                android:gravity="center_vertical">
-                <TextView
-                    android:id="@+id/author"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/c_999"
-                    android:textSize="13sp"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    tools:text="12-14 21:20"
-                    />
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="right"
-                    android:src="@drawable/ic_collect"/>
-            </FrameLayout>
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/c_999"
+                android:textSize="13sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                tools:text="12-14 21:20"
+                />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

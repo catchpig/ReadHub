@@ -6,8 +6,7 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import zhuazhu.readhub.data.net.AjaxResult;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
+import zhuazhu.readhub.data.db.model.HotNews;
 import zhuazhu.readhub.mvp.news.model.News;
 
 /**

@@ -7,9 +7,7 @@ import io.reactivex.Observable;
 import io.rx_cache2.DynamicKey;
 import io.rx_cache2.LifeCache;
 import io.rx_cache2.ProviderKey;
-import retrofit2.http.GET;
-import zhuazhu.readhub.data.net.AjaxResult;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
+import zhuazhu.readhub.data.db.model.HotNews;
 import zhuazhu.readhub.mvp.news.model.News;
 
 /**

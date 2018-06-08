@@ -137,5 +137,9 @@ dependencies {
 
     //日志
     implementation 'com.jakewharton.timber:timber:4.7.0'
+    //数据库
+    implementation "com.github.Raizlabs.DBFlow:dbflow-core:${dbflow_version}"
+    implementation "com.github.Raizlabs.DBFlow:dbflow:${dbflow_version}"
+    annotationProcessor "com.github.Raizlabs.DBFlow:dbflow-processor:${dbflow_version}"
 
 }

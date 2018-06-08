@@ -1,7 +1,6 @@
 package zhuazhu.readhub.mvp.hot.presenter;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ import zhuazhu.readhub.mvp.base.adapter.RecyclerAdapter;
 import zhuazhu.readhub.mvp.hot.HotContract;
 import zhuazhu.readhub.mvp.hot.adapter.HotAdapter;
 import zhuazhu.readhub.mvp.hot.model.HotModel;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
+import zhuazhu.readhub.data.db.model.HotNews;
 import zhuazhu.readhub.mvp.hotdetail.view.HotDetailActivity;
 import zhuazhu.readhub.data.net.HttpObservable;
 

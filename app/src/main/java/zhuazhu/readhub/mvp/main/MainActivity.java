@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.AppUtils;
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
@@ -70,5 +71,6 @@ public class MainActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         AppUtils.exitApp();
+        Rigger.getRigger(this).close();
     }
 }

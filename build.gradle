@@ -10,6 +10,7 @@ buildscript {
         retrofit2_version = "2.4.0"
         okhttp3_version = "3.10.0"
         smartrefresh_version = "1.0.5.1"
+        dbflow_version = "4.2.3"
     }
 
     repositories {

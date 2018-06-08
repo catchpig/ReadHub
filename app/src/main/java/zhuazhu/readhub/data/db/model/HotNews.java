@@ -1,15 +1,22 @@
-package zhuazhu.readhub.mvp.hot.model;
+package zhuazhu.readhub.data.db.model;
+
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
 import java.util.List;
 
+import zhuazhu.readhub.data.db.ReadHubDataBase;
 import zhuazhu.readhub.mvp.hotdetail.model.TimeLine;
 import zhuazhu.readhub.mvp.news.model.News;
 
 /**
  * @author zhuazhu
  **/
-public class HotNews {
+@Table(database = ReadHubDataBase.class)
+public class HotNews extends BaseModel{
 
     /**
      * order : 51165
@@ -18,12 +25,16 @@ public class HotNews {
      * title : 因使用留学生肖像推广小黄车 ofo百度被诉侵权
      * updatedAt : 2018-06-05T02:41:07.299Z
      */
+    @PrimaryKey
     private String id;
     private long order;
     private List<News> newsArray;
     private Date publishDate;
+    @Column
     private String summary;
+    @Column
     private String title;
+    @Column
     private Date updatedAt;
     private TimeLine timeline;
 

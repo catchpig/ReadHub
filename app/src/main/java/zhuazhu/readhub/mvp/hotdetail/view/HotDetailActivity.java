@@ -2,14 +2,14 @@ package zhuazhu.readhub.mvp.hotdetail.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+import butterknife.OnClick;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.app.ReadHubApp;
 import zhuazhu.readhub.di.module.HotDetailModule;
@@ -26,6 +26,8 @@ public class HotDetailActivity extends BasePresenterActivity<HotDetailContract.P
         intent.putExtra(NEWS_ID, id);
         context.startActivity(intent);
     }
+    @BindView(R.id.collect)
+    ImageView mCollect;
     @BindView(R.id.title)
     TextView mTitle;
     @BindView(R.id.content)
@@ -66,7 +68,7 @@ public class HotDetailActivity extends BasePresenterActivity<HotDetailContract.P
 
             @Override
             public void onPageSelected(int position) {
-                setIndexNews(String.format("左右滑动查看更多%d/%d",(position+1),mPresenter.getPageSize()));
+                setIndexNews(String.format("左右滑动查看更多%d/%d",(position+1),mPresenter.getNewsPageSize()));
             }
 
             @Override
@@ -76,6 +78,29 @@ public class HotDetailActivity extends BasePresenterActivity<HotDetailContract.P
         });
     }
 
+    @Override
+    public void updateCollectImage(boolean flag) {
+        if (flag){
+            mCollect.setImageResource(R.drawable.ic_collect_selected);
+        }else{
+            mCollect.setImageResource(R.drawable.ic_collect);
+        }
+    }
+
+    /**
+     * 点击收藏
+     */
+    @OnClick(R.id.collect)
+    protected void clickCollect(){
+
+    }
+    /**
+     * 点击返回
+     */
+    @OnClick(R.id.back)
+    protected void clickBack(){
+        finish();
+    }
     @Override
     public void setIndexNews(String indexNews) {
         mIndexNews.setText(indexNews);

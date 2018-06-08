@@ -34,7 +34,13 @@
                 android:src="@drawable/ic_back"
                 android:scaleType="centerInside"/>
         </FrameLayout>
-
+        <ImageView
+            android:id="@+id/collect"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/ic_collect"/>
     </FrameLayout>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

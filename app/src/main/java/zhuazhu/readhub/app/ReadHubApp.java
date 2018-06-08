@@ -1,17 +1,13 @@
 package zhuazhu.readhub.app;
 
 import android.app.Application;
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.blankj.utilcode.util.Utils;
-import com.jkb.fragment.rigger.rigger.Rigger;
+import com.raizlabs.android.dbflow.config.FlowManager;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -24,7 +20,6 @@ import zhuazhu.readhub.di.module.AppModule;
 import zhuazhu.readhub.di.module.NetModule;
 import zhuazhu.readhub.log.DebugLogTree;
 import zhuazhu.readhub.log.ReleaseLogTree;
-import zhuazhu.readhub.mvp.main.MainActivity;
 
 /**
  * @author zhuazhu
@@ -51,6 +46,11 @@ public class ReadHubApp extends Application {
         super.onCreate();
         Utils.init(this);
         initBugly();
+        initLog();
+        initDb();
+    }
+    private void initDb(){
+        FlowManager.init(this);
     }
     private void initLog(){
         if(BuildConfig.DEBUG){

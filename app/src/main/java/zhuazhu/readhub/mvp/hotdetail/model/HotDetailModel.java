@@ -1,5 +1,7 @@
 package zhuazhu.readhub.mvp.hotdetail.model;
 
+import com.raizlabs.android.dbflow.sql.language.SQLite;
+
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -7,9 +9,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.rx_cache2.DynamicKey;
 import zhuazhu.readhub.data.cash.ReadHubCacheProviders;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
-import zhuazhu.readhub.mvp.hotdetail.HotDetailContract;
+import zhuazhu.readhub.data.db.model.HotNews;
+import zhuazhu.readhub.data.db.model.HotNews_Table;
 import zhuazhu.readhub.data.net.ReadService;
+import zhuazhu.readhub.mvp.hotdetail.HotDetailContract;
 
 /**
  * @author zhuazhu
@@ -31,5 +34,11 @@ public class HotDetailModel implements HotDetailContract.Model {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return mCacheProviders.queryHotNewsDetail(observable,new DynamicKey(topicId));
+    }
+
+    @Override
+    public boolean queryHotNewsFromDb(String id) {
+        HotNews hotNews = SQLite.select().from(HotNews.class).where(HotNews_Table.id.eq(id)).querySingle();
+        return hotNews!=null?true:false;
     }
 }

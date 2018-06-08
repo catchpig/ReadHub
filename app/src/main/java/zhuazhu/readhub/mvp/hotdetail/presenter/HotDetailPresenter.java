@@ -1,7 +1,8 @@
 package zhuazhu.readhub.mvp.hotdetail.presenter;
 
+import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.base.BasePresenter;
-import zhuazhu.readhub.mvp.hot.model.HotNews;
+import zhuazhu.readhub.data.db.model.HotNews;
 import zhuazhu.readhub.mvp.hotdetail.HotDetailContract;
 import zhuazhu.readhub.mvp.hotdetail.adapter.NewsPageAdapter;
 import zhuazhu.readhub.mvp.hotdetail.adapter.TimeLineAdapter;
@@ -35,23 +36,38 @@ public class HotDetailPresenter extends BasePresenter<HotDetailContract.View> im
             WebActivity.start(mView.getBaseActivity(),news.getMobileUrl());
         });
     }
-
+    private HotNews mHotNews;
     @Override
     public void queryDetail(String topicId) {
         execute(mModel.queryDetail(topicId), new HttpObservable<HotNews>() {
             @Override
             public void onNext(HotNews hotNews) {
+                mHotNews = hotNews;
                 mView.setTitle(hotNews.getTitle());
                 mView.setContent(hotNews.getSummary());
                 mTimeLineAdapter.setData(hotNews.getTimeline().getTopics());
                 mNewsPageAdapter.setData(hotNews.getNewsArray());
-                mView.setIndexNews(String.format("左右滑动查看更多1/%d",getPageSize()));
+                mView.setIndexNews(String.format("左右滑动查看更多1/%d", getNewsPageSize()));
+                boolean flag = mModel.queryHotNewsFromDb(hotNews.getId());
+                mView.updateCollectImage(flag);
             }
         });
     }
 
     @Override
-    public int getPageSize() {
+    public void collectHotNew() {
+        boolean flag = mModel.queryHotNewsFromDb(mHotNews.getId());
+        //TODO 需要删除数据和增加数据
+        if(flag){
+
+        }else{
+
+        }
+        mView.updateCollectImage(!flag);
+    }
+
+    @Override
+    public int getNewsPageSize() {
         return mNewsPageAdapter.getCount();
     }
 }
