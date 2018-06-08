@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * @author zhuazhu
  **/
 @Target(ElementType.METHOD)
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface SingleClick {
     /**
      * 间隔时间

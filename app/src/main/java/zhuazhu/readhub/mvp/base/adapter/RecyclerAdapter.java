@@ -2,10 +2,11 @@ package zhuazhu.readhub.mvp.base.adapter;
 
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import zhuazhu.readhub.aop.annotaion.SingleClick;
 
 
 /**
@@ -37,8 +38,8 @@ public abstract class RecyclerAdapter<M,V extends ViewHolder> extends Adapter<V>
 
 
     @Override
-    public void onBindViewHolder(V holder, int position) {
-        M m = mData.get(position);
+    public void onBindViewHolder(final V holder, int position) {
+        final M m = mData.get(position);
         bindViewHolder(holder,m,position);
         if(mOnItemClickListener!=null){
             holder.itemView.setOnClickListener(v -> {
