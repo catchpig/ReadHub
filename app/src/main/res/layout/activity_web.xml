@@ -39,6 +39,19 @@
         android:id="@+id/frame_web"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.tencent.smtt.sdk.WebView
+            android:id="@+id/web_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </com.tencent.smtt.sdk.WebView>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:progressDrawable="@drawable/web_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:max="100"
+            android:progress="0"/>
     </FrameLayout>
 </LinearLayout>

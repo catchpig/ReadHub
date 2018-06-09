@@ -2,26 +2,34 @@ package zhuazhu.readhub.mvp.web;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.just.agentweb.AgentWeb;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import zhuazhu.readhub.R;
+import zhuazhu.readhub.log.Logger;
 import zhuazhu.readhub.mvp.base.activity.BaseActivity;
+import zhuazhu.readhub.mvp.web.client.ReadHubChromeClient;
+import zhuazhu.readhub.mvp.web.client.ReadHubChromeClient.onReceivedTitleListener;
+import zhuazhu.readhub.mvp.web.client.ReadHubClient;
+
+import static zhuazhu.readhub.mvp.web.client.ReadHubChromeClient.*;
 
 /**
  * @author zhuazhu
  **/
-public class WebActivity extends BaseActivity {
+public class WebActivity extends BaseActivity implements onReceivedTitleListener,OnRecievedProgressListener {
     private static final String TAG = "WebActivity";
     private static final String URL_KEY = "url";
     public static void start(Context context,String url){
@@ -29,12 +37,15 @@ public class WebActivity extends BaseActivity {
         intent.putExtra(URL_KEY,url);
         context.startActivity(intent);
     }
-    @BindView(R.id.frame_web)
-    FrameLayout mFrameWeb;
     @BindView(R.id.title)
     TextView mTitle;
+    @BindView(R.id.frame_web)
+    FrameLayout mFrameWeb;
+    @BindView(R.id.progress)
+    ProgressBar mProgressBar;
+    @BindView(R.id.web_view)
+    WebView mWebView;
 
-    private AgentWeb mAgentWeb;
     private String mUrl;
     @Override
     protected int getlayoutId() {
@@ -52,43 +63,38 @@ public class WebActivity extends BaseActivity {
         mUrl = intent.getStringExtra(URL_KEY);
     }
     private void initView(){
-        mAgentWeb = AgentWeb.with(this)
-                .setAgentWebParent(mFrameWeb,new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT))
-                .useDefaultIndicator(ContextCompat.getColor(this,R.color.c_6c8cff))
-                .setWebChromeClient(new WebChromeClient(){
-                    @Override
-                    public void onReceivedTitle(WebView view, String title) {
-                        super.onReceivedTitle(view, title);
-                        if (title!=null) {
-                            mTitle.setText(title);
-                        }
-                    }
-                })
-                .createAgentWeb()
-                .ready()
-                .go(mUrl);
+        //网页中的视频，上屏幕的时候，可能出现闪烁的情况,需要如下设置：Activity在onCreate时需要设置
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
+        ReadHubChromeClient readHubChromeClient = new ReadHubChromeClient();
+        readHubChromeClient.setOnReceivedTitleListener(this);
+        readHubChromeClient.setOnRecievedProgressListener(this);
+        mWebView.setWebChromeClient(readHubChromeClient);
+        mWebView.setWebViewClient(new ReadHubClient());
+        WebSettings settings = mWebView.getSettings();
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setJavaScriptEnabled(true);
+        mWebView.loadUrl(mUrl);
     }
 
     @OnClick(R.id.back)
     protected void back(){
         finish();
     }
-    @Override
-    protected void onPause() {
-        mAgentWeb.getWebLifeCycle().onPause();
-        super.onPause();
 
+    @Override
+    public void onReceivedTitle(String title) {
+        Logger.i(TAG,"标题为->%s",title);
+        mTitle.setText(title);
     }
 
     @Override
-    protected void onResume() {
-        mAgentWeb.getWebLifeCycle().onResume();
-        super.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        mAgentWeb.getWebLifeCycle().onDestroy();
-        super.onDestroy();
+    public void onReceivedProgress(int progress) {
+        Logger.i(TAG,"加载进度为->%d",progress);
+        mProgressBar.setProgress(progress);
+        if (progress==100) {
+            mProgressBar.setVisibility(View.GONE);
+        }else{
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
     }
 }

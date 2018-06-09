@@ -11,6 +11,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.tencent.smtt.sdk.QbSdk;
 
 import timber.log.Timber;
 import zhuazhu.readhub.BuildConfig;
@@ -48,6 +49,10 @@ public class ReadHubApp extends Application {
         initBugly();
         initLog();
         initDb();
+        /**
+         * 初始化X5浏览器
+         */
+        QbSdk.initX5Environment(getApplicationContext(),null);
     }
     private void initDb(){
         FlowManager.init(this);

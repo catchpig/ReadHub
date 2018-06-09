@@ -14,6 +14,13 @@
         tools:ignore="ProtectedPermissions" />
     <!-- bugly end -->
 
+    <!--x5浏览器 start-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--x5浏览器 end-->
     <application
         android:name=".app.ReadHubApp"
         android:allowBackup="true"
@@ -37,8 +44,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".mvp.web.WebActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".mvp.hotdetail.view.HotDetailActivity"></activity>
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity
+            android:name=".mvp.hotdetail.view.HotDetailActivity"
+            android:screenOrientation="portrait"/>
 
         <!--bugly 应用升级 start-->
         <activity
