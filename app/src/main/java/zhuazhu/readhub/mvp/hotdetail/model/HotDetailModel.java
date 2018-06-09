@@ -37,8 +37,18 @@ public class HotDetailModel implements HotDetailContract.Model {
     }
 
     @Override
-    public boolean queryHotNewsFromDb(String id) {
+    public boolean isCollectedById(String id) {
         HotNews hotNews = SQLite.select().from(HotNews.class).where(HotNews_Table.id.eq(id)).querySingle();
         return hotNews!=null?true:false;
+    }
+
+    @Override
+    public void saveHotNewsToDb(HotNews hotNews) {
+        hotNews.save();
+    }
+
+    @Override
+    public void deleteHotNewsFromDbById(String id) {
+        SQLite.delete().from(HotNews.class).where(HotNews_Table.id.is(id)).execute();
     }
 }

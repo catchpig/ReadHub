@@ -9,13 +9,13 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.AppUtils;
 import com.jkb.fragment.rigger.annotation.Puppet;
 import com.jkb.fragment.rigger.rigger.Rigger;
-import com.raizlabs.android.dbflow.config.FlowManager;
 import com.tencent.bugly.beta.Beta;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.base.activity.BaseActivity;
+import zhuazhu.readhub.mvp.collect.view.CollectFragment;
 import zhuazhu.readhub.mvp.hot.view.HotFragment;
 import zhuazhu.readhub.mvp.mine.view.MineFragment;
 import zhuazhu.readhub.mvp.news.view.NewsFragment;
@@ -42,13 +42,15 @@ public class MainActivity extends BaseActivity {
 
     private HotFragment mHotFragment;
     private NewsFragment mNewsFragment;
+    private CollectFragment mCollectFragment;
     private MineFragment mMineFragment;
 
     protected void initView() {
         mHotFragment = HotFragment.newInstance();
         mNewsFragment = NewsFragment.newInstance();
+        mCollectFragment = CollectFragment.newInstance();
         mMineFragment = MineFragment.newInstance();
-        Rigger.getRigger(this).addFragment(R.id.fragment,mHotFragment,mNewsFragment,mMineFragment);
+        Rigger.getRigger(this).addFragment(R.id.fragment,mHotFragment,mNewsFragment,mCollectFragment,mMineFragment);
         clickHot();
     }
     @OnClick(R.id.radio_hot)
@@ -60,6 +62,11 @@ public class MainActivity extends BaseActivity {
     protected void clickNews(){
         mTitle.setText("资讯");
         Rigger.getRigger(this).showFragment(mNewsFragment.getFragmentTag());
+    }
+    @OnClick(R.id.radio_collect)
+    protected void clickCollect(){
+        mTitle.setText("收藏");
+        Rigger.getRigger(this).showFragment(mCollectFragment.getFragmentTag());
     }
     @OnClick(R.id.radio_mine)
     protected void clickMine(){

@@ -11,5 +11,5 @@ import static zhuazhu.readhub.data.db.ReadHubDataBase.VERSION;
 @Database(version = VERSION,name = NAME)
 public class ReadHubDataBase {
     public static final String NAME = "readhubdatabase";
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
 }

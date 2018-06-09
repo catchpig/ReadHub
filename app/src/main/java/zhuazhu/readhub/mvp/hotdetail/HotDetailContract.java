@@ -64,6 +64,18 @@ public interface HotDetailContract {
          * @param id
          * @return true:收藏 false:没有收藏
          */
-        boolean queryHotNewsFromDb(String id);
+        boolean isCollectedById(String id);
+
+        /**
+         * 保存热门资讯到数据库
+         * @param hotNews
+         */
+        void saveHotNewsToDb(HotNews hotNews);
+
+        /**
+         * 通过id删除热门资讯
+         * @param id
+         */
+        void deleteHotNewsFromDbById(String id);
     }
 }

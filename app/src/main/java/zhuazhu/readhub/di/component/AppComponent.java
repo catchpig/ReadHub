@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import zhuazhu.readhub.di.module.AppModule;
+import zhuazhu.readhub.di.module.CollectModule;
 import zhuazhu.readhub.di.module.HotDetailModule;
 import zhuazhu.readhub.di.module.HotModule;
 import zhuazhu.readhub.di.module.NetModule;
@@ -18,6 +19,8 @@ public interface AppComponent {
     HotComponent hotComponent(HotModule hotModule);
 
     NewsComponent newsComponent(NewsModule newsModule);
+
+    CollectComponent collectComponent(CollectModule collectModule);
 
     HotDetailComponent hotDetailComponent(HotDetailModule hotDetailModule);
 }

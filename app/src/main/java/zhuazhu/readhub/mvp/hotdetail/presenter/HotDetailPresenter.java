@@ -1,6 +1,5 @@
 package zhuazhu.readhub.mvp.hotdetail.presenter;
 
-import zhuazhu.readhub.R;
 import zhuazhu.readhub.mvp.base.BasePresenter;
 import zhuazhu.readhub.data.db.model.HotNews;
 import zhuazhu.readhub.mvp.hotdetail.HotDetailContract;
@@ -48,7 +47,7 @@ public class HotDetailPresenter extends BasePresenter<HotDetailContract.View> im
                 mTimeLineAdapter.setData(hotNews.getTimeline().getTopics());
                 mNewsPageAdapter.setData(hotNews.getNewsArray());
                 mView.setIndexNews(String.format("左右滑动查看更多1/%d", getNewsPageSize()));
-                boolean flag = mModel.queryHotNewsFromDb(hotNews.getId());
+                boolean flag = mModel.isCollectedById(hotNews.getId());
                 mView.updateCollectImage(flag);
             }
         });
@@ -56,12 +55,12 @@ public class HotDetailPresenter extends BasePresenter<HotDetailContract.View> im
 
     @Override
     public void collectHotNew() {
-        boolean flag = mModel.queryHotNewsFromDb(mHotNews.getId());
-        //TODO 需要删除数据和增加数据
+        String id = mHotNews.getId();
+        boolean flag = mModel.isCollectedById(id);
         if(flag){
-
+            mModel.deleteHotNewsFromDbById(id);
         }else{
-
+            mModel.saveHotNewsToDb(mHotNews);
         }
         mView.updateCollectImage(!flag);
     }

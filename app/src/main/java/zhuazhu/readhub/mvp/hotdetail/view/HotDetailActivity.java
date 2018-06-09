@@ -92,7 +92,7 @@ public class HotDetailActivity extends BasePresenterActivity<HotDetailContract.P
      */
     @OnClick(R.id.collect)
     protected void clickCollect(){
-
+        mPresenter.collectHotNew();
     }
     /**
      * 点击返回

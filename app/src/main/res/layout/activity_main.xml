@@ -55,6 +55,17 @@
             android:gravity="center"
             android:text="资讯"/>
         <RadioButton
+            android:id="@+id/radio_collect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/collect_select"
+            android:textColor="@color/tab_select"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:text="收藏"/>
+        <RadioButton
             android:id="@+id/radio_mine"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

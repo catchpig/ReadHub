@@ -1,8 +1,10 @@
 package zhuazhu.readhub.data.db.model;
 
 import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.NotNull;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.annotation.Unique;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
@@ -27,6 +29,7 @@ public class HotNews extends BaseModel{
      */
     @PrimaryKey
     private String id;
+    @Column
     private long order;
     private List<News> newsArray;
     private Date publishDate;
