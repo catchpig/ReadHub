@@ -36,9 +36,16 @@
         </FrameLayout>
     </FrameLayout>
     <FrameLayout
-        android:id="@+id/frame_web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/c_666">
+        <TextView
+            android:id="@+id/host"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textColor="@color/c_fff"
+            android:textSize="15sp"
+            android:gravity="center"/>
         <com.tencent.smtt.sdk.WebView
             android:id="@+id/web_view"
             android:layout_width="match_parent"

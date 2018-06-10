@@ -24,11 +24,20 @@ public class ReadHubChromeClient extends WebChromeClient {
             mOnRecievedProgressListener.onReceivedProgress(i);
         }
     }
-
+    private static final String HTTP_STRING = "http://";
+    private static final String HTTPS_STRING = "https://";
     @Override
     public void onReceivedTitle(WebView webView, String s) {
         if(mOnReceivedTitleListener!=null){
-            mOnReceivedTitleListener.onReceivedTitle(s);
+            String url = webView.getUrl();
+            if(url.contains(HTTP_STRING)){
+                url = url.replace(HTTP_STRING,"");
+            }
+            if(url.contains(HTTPS_STRING)){
+                url = url.replace(HTTPS_STRING,"");
+            }
+            String host = url.substring(0,url.indexOf("/"));
+            mOnReceivedTitleListener.onReceivedTitle(host,s);
         }
     }
 
@@ -42,6 +51,6 @@ public class ReadHubChromeClient extends WebChromeClient {
      * 标题内容的接收监听
      */
     public interface onReceivedTitleListener{
-        void onReceivedTitle(String title);
+        void onReceivedTitle(String host,String title);
     }
 }
